@@ -101,6 +101,89 @@ pad9.onmouseup = function(){
     pad9.style.backgroundColor = 'lightgrey';
 } 
 
+// TOUCH SCREEN
+
+pad1.ontouchstart = function(){
+    perc1.play();
+    pad1.style.backgroundColor = '#1fff16';
+}
+pad1.ontouchend = function(){
+    perc1.load();
+    pad1.style.backgroundColor = 'lightgrey';
+}  
+
+pad2.ontouchstart = function(){
+perc2.play();
+pad2.style.backgroundColor = '#fc077c';
+}
+pad2.ontouchend = function(){
+perc2.load();
+pad2.style.backgroundColor = 'lightgrey';
+}  
+
+pad3.ontouchstart = function(){
+perc3.play();
+pad3.style.backgroundColor = 'yellow';
+}
+pad3.ontouchend = function(){
+perc3.load();
+pad3.style.backgroundColor = 'lightgrey';
+}  
+
+pad4.ontouchstart = function(){
+perc4.play();
+pad4.style.backgroundColor = 'red';
+}
+pad4.ontouchend = function(){
+perc4.load();
+pad4.style.backgroundColor = 'lightgrey';
+}  
+
+pad5.ontouchstart = function(){
+shaker1.play();
+pad5.style.backgroundColor = 'purple';
+}
+pad5.ontouchend = function(){
+shaker1.load();
+pad5.style.backgroundColor = 'lightgrey';
+}  
+
+pad6.ontouchstart = function(){
+ride1.play();
+pad6.style.backgroundColor = 'orange';
+}
+pad6.ontouchend = function(){
+ride1.load();
+pad6.style.backgroundColor = 'lightgrey';
+} 
+
+pad7.ontouchstart = function(){
+hihat1.play();
+pad7.style.backgroundColor = '#e000c5';
+}
+pad7.ontouchend = function(){
+hihat1.load();
+pad7.style.backgroundColor = 'lightgrey';
+} 
+
+pad8.ontouchstart = function(){
+clap1.play();
+pad8.style.backgroundColor = 'cyan';
+}
+pad8.ontouchend = function(){
+clap1.load();
+pad8.style.backgroundColor = 'lightgrey';
+} 
+
+pad9.ontouchstart = function(){
+kick1.play();
+pad9.style.backgroundColor = '#f8514a';
+}
+pad9.ontouchend = function(){
+kick1.load();
+pad9.style.backgroundColor = 'lightgrey';
+} 
+
 
 /* TOGGLE MODE
 
