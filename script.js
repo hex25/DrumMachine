@@ -19,7 +19,7 @@ const hihat1 = document.getElementById('hihat1');
 const clap1 = document.getElementById('clap1');
 const kick1 = document.getElementById('kick1');
 
-/* SHOT MODE
+// SHOT MODE
 pad1.onmousedown = function(){
         perc1.play();
         pad1.style.backgroundColor = '#1fff16';
@@ -183,10 +183,9 @@ pad9.ontouchend = function(){
 kick1.load();
 pad9.style.backgroundColor = 'lightgrey';
 } 
-*/
 
 
-// TOGGLE MODE
+/* TOGGLE MODE
 
 function isClicked(item) {
     if (item.style.backgroundColor === 'lightgrey') {
@@ -280,5 +279,7 @@ pad9.onclick = function(){
         pad9.style.backgroundColor = 'lightgrey';
     }
 }; 
+
+*/
 
 
