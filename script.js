@@ -62,66 +62,58 @@ for (let n = 0; n < modeButtons[0].length; n++) {
 }
 
 
-/* SHOT MODE Function
+// SHOT MODE Function
 
-function playShotMode() {
+function playShotMode(pad,sound,color) {
+    pad.onmousedown = function () {
 
-    for (let k = 0; k < pads[0].length; k++) {
+        sound.play();
+        pad.style.backgroundColor = color;
+    }
+    pad.onmouseup = function () {
 
-        pads[0][k].onmousedown = function () {
-    
-            pads[1][k].play();
-            pads[0][k].style.backgroundColor = pads[2][k];
-        }
-        pads[0][k].onmouseup = function () {
-    
-            pads[1][k].load();
-            pads[0][k].style.backgroundColor = 'lightgrey';
-        }
-        pads[0][k].ontouchstart = function () {
-    
-            pads[1][k].play();
-            pads[0][k].style.backgroundColor = pads[2][k];
-        }
-        pads[0][k].ontouchend = function () {
-    
-            pads[1][k].load();
-            pads[0][k].style.backgroundColor = 'lightgrey';
+        sound.load();
+        pad.style.backgroundColor = 'lightgrey';
+    }
+    pad.ontouchstart = function () {
+        
+        sound.play();
+        pad.style.backgroundColor = color;
+    }
+    pad.ontouchend = function () {
+
+        sound.load();
+        pad.style.backgroundColor = 'lightgrey';
+    }
+}
+
+function playToggleMode(pad,sound,color) {
+
+    pad.onclick = function(){
+        if (isClicked(pad) === false) {
+            sound.play();
+            pad.style.backgroundColor = color;
+        } else if (isClicked(pad) === true) {
+            sound.load();
+            pad.style.backgroundColor = 'lightgrey';
         }
     }
 }
 
-function playToggleMode() {
-    
-    for (let j=0; j<pads[0].length; j++) {
-    
-    pads[0][j].onclick = function(){
-        if (isClicked(pads[0][j]) === false) {
-            pads[1][j].play();
-            pads[0][j].style.backgroundColor = pads[2][j];
-        } else if (isClicked(pads[0][j]) === true) {
-            pads[1][j].pause();
-            pads[0][j].style.backgroundColor = 'lightgrey';
-        }
-    }
-    }
-}
 
-for (let o=0; o<pads.length; o++) {
+for (let x=0; x<pads[0].length; x++) {
 
-    if (isClicked(modeButtons[0][o]) === true) {
-        playShotMode();
-    } else if (isClicked(modeButtons[1][o]) === true) {
-        playToggleMode();
+    if (isClicked(modeButtons[0][x]) === true) {
+        playShotMode(pads[0][x], pads[1][x], pads[2][x]);
+    } else if (isClicked(modeButtons[1][x]) === true) {
+        playToggleMode(pads[0][x], pads[1][x], pads[2][x]);
     }
 
 }
 
-*/
 
 
-
-// SHOT MODE
+/* SHOT MODE
 
 for (let k = 0; k < pads[0].length; k++) {
 
@@ -147,7 +139,7 @@ for (let k = 0; k < pads[0].length; k++) {
     }
 }
 
-
+*/
 /* TOGGLE MODE
 
 
