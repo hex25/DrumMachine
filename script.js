@@ -7,26 +7,20 @@ const pads = [
     ['#1fff16', '#fc077c', 'yellow', 'red', 'purple', 'orange', '#e000c5', 'cyan', '#f8514a'],
 ];
 
-const modeButtons = [
-    [document.getElementById('shot1'), document.getElementById('shot2'), document.getElementById('shot3'), document.getElementById('shot4'), document.getElementById('shot5'), document.getElementById('shot6'), document.getElementById('shot7'), document.getElementById('shot8'), document.getElementById('shot9')],
-    [document.getElementById('toggle1'), document.getElementById('toggle2'), document.getElementById('toggle3'), document.getElementById('toggle4'), document.getElementById('toggle5'), document.getElementById('toggle6'), document.getElementById('toggle7'), document.getElementById('toggle8'), document.getElementById('toggle9')]
-];
+const shotButton = document.getElementById('shot-button');
+const toggleButton = document.getElementById('toggle-button');
 
 for (let i = 1; i < 10; i++) {
     let id = `pad${i}`;
     document.getElementById(id).style.backgroundColor = 'lightgrey';
 }
 
-for (let l = 1; l < 10; l++) {
-    let shotid = `shot${l}`;
-    document.getElementById(shotid).style.backgroundColor = 'lightgoldenrodyellow';
+for (let m = 0; m < pads[0].length; m++) {
+    shotButton.style.backgroundColor = 'lightgoldenrodyellow';
+    toggleButton.style.backgroundColor = 'lightgrey';
+    pads[0][m].onmousedown = function() {startPlay(pads[0][m],pads[1][m],pads[2][m])};
+    pads[0][m].onmouseup = function() {stopPlay(pads[0][m],pads[1][m])};
 }
-
-for (let m = 1; m < 10; m++) {
-    let toggleid = `toggle${m}`;
-    document.getElementById(toggleid).style.backgroundColor = 'lightgrey';
-}
-
 
 function isClicked(item) {
     if (item.style.backgroundColor === 'lightgrey') {
@@ -36,132 +30,51 @@ function isClicked(item) {
     }
 }
 
-
-// MODE BUTTONS
-
-for (let n = 0; n < modeButtons[0].length; n++) {
-
-    modeButtons[0][n].onclick = function () {
-        if (isClicked(modeButtons[0][n]) === false) {
-            modeButtons[0][n].style.backgroundColor = 'lightgoldenrodyellow';
-            modeButtons[1][n].style.backgroundColor = 'lightgrey';
-        } else if (isClicked(modeButtons[0][n]) === true) {
-            modeButtons[1][n].style.backgroundColor = 'lightgreen';
-            modeButtons[0][n].style.backgroundColor = 'lightgrey';
-        }
-    }
-    modeButtons[1][n].onclick = function () {
-        if (isClicked(modeButtons[1][n]) === false) {
-            modeButtons[0][n].style.backgroundColor = 'lightgrey';
-            modeButtons[1][n].style.backgroundColor = 'lightgreen';
-        } else if (isClicked(modeButtons[1][n]) === true) {
-            modeButtons[1][n].style.backgroundColor = 'lightgrey';
-            modeButtons[0][n].style.backgroundColor = 'lightgoldenrodyellow';
-        }
-    }
+function startPlay(pad, sound, color) {
+    sound.play();
+    pad.style.backgroundColor = color;
 }
 
-
-// SHOT MODE Function
-
-function playShotMode(pad,sound,color) {
-    pad.onmousedown = function () {
-
-        sound.play();
-        pad.style.backgroundColor = color;
-    }
-    pad.onmouseup = function () {
-
-        sound.load();
-        pad.style.backgroundColor = 'lightgrey';
-    }
-    pad.ontouchstart = function () {
-        
-        sound.play();
-        pad.style.backgroundColor = color;
-    }
-    pad.ontouchend = function () {
-
-        sound.load();
-        pad.style.backgroundColor = 'lightgrey';
-    }
+function stopPlay(pad, sound) {
+    sound.load();
+    pad.style.backgroundColor = 'lightgrey';
 }
 
 function playToggleMode(pad,sound,color) {
 
-    pad.onclick = function(){
-        if (isClicked(pad) === false) {
-            sound.play();
-            pad.style.backgroundColor = color;
-        } else if (isClicked(pad) === true) {
-            sound.load();
-            pad.style.backgroundColor = 'lightgrey';
-        }
+    if (isClicked(pad) === false) {
+        startPlay(pad, sound, color);
+
+    } else if (isClicked(pad) === true) {
+        stopPlay(pad, sound)
     }
 }
 
+// click handlers
 
-for (let x=0; x<pads[0].length; x++) {
 
-    if (isClicked(modeButtons[0][x]) === true) {
-        playShotMode(pads[0][x], pads[1][x], pads[2][x]);
-    } else if (isClicked(modeButtons[1][x]) === true) {
-        playToggleMode(pads[0][x], pads[1][x], pads[2][x]);
+// mode button clicks
+
+
+
+shotButton.onclick = function() {
+
+    for (let k = 0; k < pads[0].length; k++) {
+    shotButton.style.backgroundColor = 'lightgoldenrodyellow';
+    toggleButton.style.backgroundColor = 'lightgrey';
+    pads[0][k].onmousedown = function() {startPlay(pads[0][k],pads[1][k],pads[2][k])};
+    pads[0][k].onmouseup = function() {stopPlay(pads[0][k],pads[1][k])};
+    pads[0][k].onclick = "event.stopPropagation()";
     }
+    
+};
+toggleButton.onclick = function() {
 
+    for (let j = 0; j < pads[0].length; j++) {
+    toggleButton.style.backgroundColor = 'lightgreen';
+    shotButton.style.backgroundColor = 'lightgrey';
+    pads[0][j].onclick = function() {playToggleMode(pads[0][j],pads[1][j],pads[2][j])};
+    pads[0][j].onmousedown = "event.stopPropagation()";
+    pads[0][j].onmouseup = "event.stopPropagation()";
 }
-
-
-
-/* SHOT MODE
-
-for (let k = 0; k < pads[0].length; k++) {
-
-    pads[0][k].onmousedown = function () {
-
-        pads[1][k].play();
-        pads[0][k].style.backgroundColor = pads[2][k];
-    }
-    pads[0][k].onmouseup = function () {
-
-        pads[1][k].load();
-        pads[0][k].style.backgroundColor = 'lightgrey';
-    }
-    pads[0][k].ontouchstart = function () {
-
-        pads[1][k].play();
-        pads[0][k].style.backgroundColor = pads[2][k];
-    }
-    pads[0][k].ontouchend = function () {
-
-        pads[1][k].load();
-        pads[0][k].style.backgroundColor = 'lightgrey';
-    }
-}
-
-*/
-/* TOGGLE MODE
-
-
-function isClicked(item) {
-    if (item.style.backgroundColor === 'lightgrey') {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-for (let j=0; j<pads[0].length; j++) {
-
-pads[0][j].onclick = function(){
-    if (isClicked(pads[0][j]) === false) {
-        pads[1][j].play();
-        pads[0][j].style.backgroundColor = pads[2][j];
-    } else if (isClicked(pads[0][j]) === true) {
-        pads[1][j].pause();
-        pads[0][j].style.backgroundColor = 'lightgrey';
-    }
-}
-}
-
-*/
+};
