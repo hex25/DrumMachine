@@ -10,7 +10,7 @@ body {
     width: 100px;
     height: 30px;
     margin: 20px;
-    border: 2px solid black;
+    border: 2px solid black; 
     border-radius: 5px;
     display: inline-block;
     text-align: center;
@@ -26,10 +26,10 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.pad, #shot-button, #toggle-button {
+.pad, #shot-button, #toggle-button, #bank1, #bank2 {
     margin: 4px;
-    width: 148px;
-    height: 148px;
+    width: 130px;
+    height: 130px;
     border: 2px solid black;
     display: inline-block;
     border-radius: 5px;
@@ -46,4 +46,12 @@ body {
 #shot-button {
     background-color: lightgoldenrodyellow;
 }
+#bank1, #bank2 {
 
+    width: 130px;
+    height: 20px;
+    padding: 5px;
+}
+#bank1 {
+    background-color: lightpink;
+}

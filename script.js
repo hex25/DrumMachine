@@ -7,8 +7,14 @@ const pads = [
     ['#1fff16', '#fc077c', 'yellow', 'red', 'purple', 'orange', '#e000c5', 'cyan', '#f8514a'],
 ];
 
+const bank1 =  [document.getElementById('perc1'), document.getElementById('perc2'), document.getElementById('perc3'), document.getElementById('perc4'), document.getElementById('shaker1'), document.getElementById('ride1'), document.getElementById('hihat1'), document.getElementById('clap1'), document.getElementById('kick1')];
+const bank2 =  [document.getElementById('perc3'), document.getElementById('perc1'), document.getElementById('perc2'), document.getElementById('perc5'), document.getElementById('ride1'), document.getElementById('shaker1'), document.getElementById('hihat2'), document.getElementById('clap2'), document.getElementById('kick2')];
+
 const shotButton = document.getElementById('shot-button');
 const toggleButton = document.getElementById('toggle-button');
+
+const bank1Button = document.getElementById('bank1');
+const bank2Button = document.getElementById('bank2');
 
 for (let i = 1; i < 10; i++) {
     let id = `pad${i}`;
@@ -50,6 +56,12 @@ function playToggleMode(pad,sound,color) {
     }
 }
 
+function stopAll() {
+    for (let j = 0; j < pads[0].length; j++) {
+        stopPlay(pads[0][j],pads[1][j])
+    }
+}
+
 // click handlers
 
 
@@ -78,3 +90,18 @@ toggleButton.onclick = function() {
     pads[0][j].onmouseup = "event.stopPropagation()";
 }
 };
+
+// bank button clicks
+
+bank1Button.onclick = function() {
+    stopAll();
+    bank1Button.style.backgroundColor = 'lightpink';
+    bank2Button.style.backgroundColor = 'lightgrey';
+    pads[1] = bank1;
+}
+bank2Button.onclick = function() {
+    stopAll();
+    bank2Button.style.backgroundColor = 'lightskyblue';
+    bank1Button.style.backgroundColor = 'lightgrey';
+    pads[1] = bank2;
+}
