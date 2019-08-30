@@ -2,7 +2,7 @@ const pads = [
     //buttons
     [document.getElementById('pad1'), document.getElementById('pad2'), document.getElementById('pad3'), document.getElementById('pad4'), document.getElementById('pad5'), document.getElementById('pad6'), document.getElementById('pad7'), document.getElementById('pad8'), document.getElementById('pad9')],
     //sounds
-    [document.getElementById('perc1'), document.getElementById('perc2'), document.getElementById('perc3'), document.getElementById('perc4'), document.getElementById('shaker1'), document.getElementById('ride1'), document.getElementById('hihat1'), document.getElementById('clap1'), document.getElementById('kick1')],
+    [document.getElementById('kick1'), document.getElementById('clap1'), document.getElementById('hihat1'), document.getElementById('hihat2'), document.getElementById('shaker1'), document.getElementById('ride1'), document.getElementById('perc1'), document.getElementById('perc2'), document.getElementById('perc4')],
     //colors
     ['#1fff16', '#fc077c', 'yellow', 'red', 'purple', 'orange', '#e000c5', 'cyan', '#f8514a'],
 ];
@@ -15,6 +15,8 @@ const toggleButton = document.getElementById('toggle-button');
 
 const bank1Button = document.getElementById('bank1');
 const bank2Button = document.getElementById('bank2');
+
+const stopButton = document.getElementById('stop');
 
 for (let i = 1; i < 10; i++) {
     let id = `pad${i}`;
@@ -67,8 +69,6 @@ function stopAll() {
 
 // mode button clicks
 
-
-
 shotButton.onclick = function() {
 
     for (let k = 0; k < pads[0].length; k++) {
@@ -104,4 +104,14 @@ bank2Button.onclick = function() {
     bank2Button.style.backgroundColor = 'lightskyblue';
     bank1Button.style.backgroundColor = 'lightgrey';
     pads[1] = bank2;
+}
+
+// stop all button click
+
+stopButton.onclick = function() {stopAll()};
+stopButton.onmousedown = function() {
+    stopButton.style.backgroundColor = 'red';
+}
+stopButton.onmouseup = function() {
+    stopButton.style.backgroundColor = 'lightgrey';
 }
