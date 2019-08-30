@@ -18,6 +18,8 @@ const bank2Button = document.getElementById('bank2');
 
 const stopButton = document.getElementById('stop');
 
+const loadButton = document.getElementById('load');
+
 for (let i = 1; i < 10; i++) {
     let id = `pad${i}`;
     document.getElementById(id).style.backgroundColor = 'lightgrey';
@@ -29,6 +31,8 @@ for (let m = 0; m < pads[0].length; m++) {
     pads[0][m].onmousedown = function() {startPlay(pads[0][m],pads[1][m],pads[2][m])};
     pads[0][m].onmouseup = function() {stopPlay(pads[0][m],pads[1][m])};
 }
+
+loadButton.style.backgroundColor = 'lightgrey';
 
 function isClicked(item) {
     if (item.style.backgroundColor === 'lightgrey') {
@@ -114,4 +118,16 @@ stopButton.onmousedown = function() {
 }
 stopButton.onmouseup = function() {
     stopButton.style.backgroundColor = 'lightgrey';
+}
+
+// load button click
+
+loadButton.onclick = function() {
+    if (isClicked(loadButton) === false) {
+        loadButton.style.backgroundColor = 'tomato';
+
+    } else if (isClicked(loadButton) === true) {
+        loadButton.style.backgroundColor = 'lightgrey';
+    }
+    
 }

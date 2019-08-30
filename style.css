@@ -2,6 +2,15 @@
 margin: 0;
 padding: 0;
 }
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
 body {
   background-color: grey; 
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif 
@@ -16,8 +25,8 @@ body {
     text-align: center;
 } 
 
-#pads-container {
-    width: 500px;
+#container {
+    width: 800px;
     height: 550px;
     margin: 40px auto;
     border: 2px dashed black;
@@ -26,7 +35,18 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.pad, #shot-button, #toggle-button, #bank1, #bank2, #stop {
+#button-container {
+    width: 100px;
+    display: inline-block;
+    position: relative;
+    top: -100px;
+}
+#pads-container {
+    display: inline-block;
+    width: 500px;
+    height: auto;
+}
+.pad {
     margin: 4px;
     width: 130px;
     height: 130px;
@@ -37,24 +57,34 @@ body {
     background-color: lightgrey;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-#shot-button, #toggle-button {
-    width: 130px;
+#shot-button, #toggle-button, #bank1, #bank2, #stop, #load {
+    width: 80px;
     height: 20px;
     padding: 5px;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: lightgrey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: inline-block;
+    margin: 5px;
 
 }
 #shot-button {
     background-color: lightgoldenrodyellow;
 }
-#bank1, #bank2, #stop {
-    width: 130px;
-    height: 20px;
-    padding: 5px;
-}
 #bank1 {
     background-color: lightpink;
 }
-#stop {
+#sequencer-container {
     display: block;
-    margin: 0 auto;
+}
+.seq-button {
+    width: 30px;
+    height: 80px;
+    background-color: lightgrey;
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 5px;
 }
