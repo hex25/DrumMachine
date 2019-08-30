@@ -7,7 +7,7 @@ const pads = [
     ['#1fff16', '#fc077c', 'yellow', 'red', 'purple', 'orange', '#e000c5', 'cyan', '#f8514a'],
 ];
 
-const bank1 =  [document.getElementById('perc1'), document.getElementById('perc2'), document.getElementById('perc3'), document.getElementById('perc4'), document.getElementById('shaker1'), document.getElementById('ride1'), document.getElementById('hihat1'), document.getElementById('clap1'), document.getElementById('kick1')];
+const bank1 =  [document.getElementById('kick1'), document.getElementById('clap1'), document.getElementById('hihat1'), document.getElementById('hihat2'), document.getElementById('shaker1'), document.getElementById('ride1'), document.getElementById('perc1'), document.getElementById('perc2'), document.getElementById('perc4')];
 const bank2 =  [document.getElementById('perc3'), document.getElementById('perc1'), document.getElementById('perc2'), document.getElementById('perc5'), document.getElementById('ride1'), document.getElementById('shaker1'), document.getElementById('hihat2'), document.getElementById('clap2'), document.getElementById('kick2')];
 
 const shotButton = document.getElementById('shot-button');
