@@ -16,7 +16,7 @@ const toggleButton = document.getElementById('toggle-button');
 const bank1Button = document.getElementById('bank1');
 const bank2Button = document.getElementById('bank2');
 
-const stopButton = document.getElementById('stop');
+const stopButton = document.getElementById('stop-all');
 
 const loadButton = document.getElementById('load');
 
@@ -82,6 +82,14 @@ function playToggleMode(pad, sound, color) {
     }
 }
 
+function displaySequencer(sequencerId, color) {
+    document.getElementById(sequencerId).style.display = 'block';
+    document.getElementById('seq-indicator').style.backgroundColor = color;
+}
+function hideSequencer(sequencerId) {
+    document.getElementById(sequencerId).style.display = 'none';
+}
+
 function stopAll() {
     for (let j = 0; j < pads[0].length; j++) {
         stopPlay(pads[0][j], pads[1][j])
@@ -98,6 +106,7 @@ shotButton.onclick = function () {
     for (let k = 0; k < pads[0].length; k++) {
         shotButton.style.backgroundColor = 'lightgoldenrodyellow';
         toggleButton.style.backgroundColor = 'lightgrey';
+        loadButton.style.backgroundColor = 'lightgrey';
         pads[0][k].onmousedown = function () { startPlay(pads[0][k], pads[1][k], pads[2][k]) };
         pads[0][k].onmouseup = function () { stopPlay(pads[0][k], pads[1][k]) };
         pads[0][k].onclick = "event.stopPropagation()";
@@ -109,11 +118,32 @@ toggleButton.onclick = function () {
     for (let j = 0; j < pads[0].length; j++) {
         toggleButton.style.backgroundColor = 'lightgreen';
         shotButton.style.backgroundColor = 'lightgrey';
+        loadButton.style.backgroundColor = 'lightgrey';
         pads[0][j].onclick = function () { playToggleMode(pads[0][j], pads[1][j], pads[2][j]) };
         pads[0][j].onmousedown = "event.stopPropagation()";
         pads[0][j].onmouseup = "event.stopPropagation()";
     }
 };
+
+loadButton.onclick = function () {
+
+    stopAll();
+    for (let p = 0; p < pads[0].length; p++) {
+        toggleButton.style.backgroundColor = 'lightgrey';
+        shotButton.style.backgroundColor = 'lightgrey';
+        loadButton.style.backgroundColor = 'tomato';
+        pads[0][p].onclick = function () {
+            pads[0][p].onmousedown = function () { startPlay(pads[0][p], pads[1][p], pads[2][p]) };
+            pads[0][p].onmouseup = function () { stopPlay(pads[0][p], pads[1][p]) };
+            for (let i=0; i<9; i++) {
+                hideSequencer(`seq-cont${i}`);
+            }
+            displaySequencer(`seq-cont${p}`, pads[2][p]);
+            
+        };
+    }
+}
+
 
 // bank button clicks
 
@@ -142,12 +172,3 @@ stopButton.onmouseup = function () {
 
 // load button click
 
-loadButton.onclick = function () {
-    if (isClicked(loadButton) === false) {
-        loadButton.style.backgroundColor = 'tomato';
-
-    } else if (isClicked(loadButton) === true) {
-        loadButton.style.backgroundColor = 'lightgrey';
-    }
-
-}
