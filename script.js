@@ -125,6 +125,8 @@ toggleButton.onclick = function () {
     }
 };
 
+// load button click
+
 loadButton.onclick = function () {
 
     stopAll();
@@ -170,5 +172,17 @@ stopButton.onmouseup = function () {
     stopButton.style.backgroundColor = 'lightgrey';
 }
 
-// load button click
+// sequencer button clicks
+
+/*for (let x=0; x=16; x++) {
+    document.getElementById(`seq-b-0${x}`).onclick = function() {
+   
+            document.getElementById(`seq-b-0${x}`).style.backgroundColor = pads[2][0];
+        } else {
+            document.getElementById(`seq-b-0${x}`).style.backgroundColor = 'lightgrey';
+        }
+    }
+}
+*/
+
 
