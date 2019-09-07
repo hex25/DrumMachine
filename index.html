@@ -3,125 +3,86 @@
 <!-- header -->
 
 <head>
-    <link rel=stylesheet type=text/css href=./style.css> <title>Drum Machine Simulator</title>
+    <link rel=stylesheet type=text/css href=./style.css> 
+    <link href="https://fonts.googleapis.com/css?family=Chilanka|Press+Start+2P|Ubuntu:400,700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="./favicon.png" />
+    <title>Drum Machine Simulator</title>
 </head>
 <!-- body -->
 
-<body>
-    <div id="container" class="no-select">
+<body id="body">
+    <div id="page">
+    <div id="drum-machine" class="no-select">
 
         <div id="pads-container">
 
-            <div id="pad1" class="pad no-select">
+            <div id="pad1" class="drum-pad">
                 <p>Q</p>
-                <audio loop id="kick1">
-                    <source src="Sounds/Kick1.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <audio loop id="perc3">
-                    <source src="Sounds/Perc3.mp3" type="audio/mp3">
+                <audio class="clip" id="Q" src="Sounds/Kick1.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </div>
-            <div id="pad2" class="pad no-select">
+            <div id="pad2" class="drum-pad">
                 <p>W</p>
-                <audio loop id="clap1">
-                    <source src="Sounds/Clap1.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <audio loop id="perc1">
-                    <source src="Sounds/Perc1.mp3" type="audio/mp3">
+                <audio class="clip" id="W" src="Sounds/Clap1.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </div>
-            <div id="pad3" class="pad no-select">
+            <div id="pad3" class="drum-pad">
                 <p>E</p>
-                <audio loop id="hihat1">
-                    <source src="Sounds/Hihat1.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <audio loop id="perc2">
-                    <source src="Sounds/Perc2.mp3" type="audio/mp3">
+                <audio class="clip" id="E" src="Sounds/Hihat1.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </div>
-            <div id="pad4" class="pad no-select">
+            <div id="pad4" class="drum-pad">
                 <p>A</p>
-                <audio loop id="hihat2">
-                    <source src="Sounds/Hihat2.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <audio loop id="perc5">
-                    <source src="Sounds/Perc5.mp3" type="audio/mp3">
+                <audio class="clip" id="A" src="Sounds/Hihat2.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </div>
-            <div id="pad5" class="pad no-select">
+            <div id="pad5" class="drum-pad">
                 <p>S</p>
-                <audio loop id="shaker1">
-                    <source src="Sounds/Shaker1.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <audio loop id="ride1">
-                    <source src="Sounds/Ride1.mp3" type="audio/mp3">
+                <audio class="clip" id="S" src="Sounds/Shaker1.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </div>
-            <div id="pad6" class="pad no-select">
+            <div id="pad6" class="drum-pad">
                 <p>D</p>
-                <audio loop id="ride1">
-                    <source src="Sounds/Ride1.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <audio loop id="shaker1">
-                    <source src="Sounds/Shaker1.mp3" type="audio/mp3">
+                <audio class="clip" id="D" src="Sounds/Ride1.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </div>
-            <div id="pad7" class="pad no-select">
+            <div id="pad7" class="drum-pad">
                 <p>Z</p>
-                <audio loop id="perc1">
-                    <source src="Sounds/Perc1.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <audio loop id="hihat2">
-                    <source src="Sounds/Hihat2.mp3" type="audio/mp3">
+                <audio class="clip" id="Z" src="Sounds/Perc3.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </div>
-            <div id="pad8" class="pad no-select">
+            <div id="pad8" class="drum-pad">
                 <p>X</p>
-                <audio loop id="perc2">
-                    <source src="Sounds/Perc2.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <audio loop id="clap2">
-                    <source src="Sounds/Clap2.mp3" type="audio/mp3">
+                <audio class="clip" id="X" src="Sounds/Perc2.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </div>
-            <div id="pad9" class="pad no-select">
+            <div id="pad9" class="drum-pad">
                 <p>C</p>
-                <audio loop id="perc4">
-                    <source src="Sounds/Perc4.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <audio loop id="kick2">
-                    <source src="Sounds/Kick2.mp3" type="audio/mp3">
+                <audio class="clip" id="C" src="Sounds/Perc4.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </div>
         </div>
         <div id="button-container">
-            <div id="on-button"></div>
-            <div id="screen"></div>
+            <div id="logo"><img src="./favicon.png">JAMix</div>
+            <div id="power">POWER</div>
+            <div id="display"></div>
+            <div id="volume">this is volume div</div>
             <div id="bank1" class="no-select">BANK 1</div>
             <div id="bank2" class="no-select">BANK 2</div>
         </div>
 
     </div>
     <script src=./script.js> </script> 
+</div>
 </body> 
 <!-- footer -->
     

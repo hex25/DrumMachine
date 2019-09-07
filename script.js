@@ -1,174 +1,261 @@
 const pads = [
-    //buttons
+    //pads
     [document.getElementById('pad1'), document.getElementById('pad2'), document.getElementById('pad3'), document.getElementById('pad4'), document.getElementById('pad5'), document.getElementById('pad6'), document.getElementById('pad7'), document.getElementById('pad8'), document.getElementById('pad9')],
     //sounds
-    [document.getElementById('kick1'), document.getElementById('clap1'), document.getElementById('hihat1'), document.getElementById('hihat2'), document.getElementById('shaker1'), document.getElementById('ride1'), document.getElementById('perc1'), document.getElementById('perc2'), document.getElementById('perc4')],
+    [document.getElementById('Q'), document.getElementById('W'), document.getElementById('E'), document.getElementById('A'), document.getElementById('S'), document.getElementById('D'), document.getElementById('Z'), document.getElementById('X'), document.getElementById('C')],
     //colors
     ['#1fff16', '#fc077c', 'yellow', 'red', 'purple', 'orange', '#e000c5', 'cyan', '#f8514a'],
 ];
 
-const bank1 = [document.getElementById('kick1'), document.getElementById('clap1'), document.getElementById('hihat1'), document.getElementById('hihat2'), document.getElementById('shaker1'), document.getElementById('ride1'), document.getElementById('perc1'), document.getElementById('perc2'), document.getElementById('perc4')];
-const bank2 = [document.getElementById('perc3'), document.getElementById('perc1'), document.getElementById('perc2'), document.getElementById('perc5'), document.getElementById('ride1'), document.getElementById('shaker1'), document.getElementById('hihat2'), document.getElementById('clap2'), document.getElementById('kick2')];
+const display = document.getElementById('display');
 
-const shotButton = document.getElementById('shot-button');
-const toggleButton = document.getElementById('toggle-button');
+document.getElementById('power').style.backgroundColor = 'lightgrey';
 
-const bank1Button = document.getElementById('bank1');
-const bank2Button = document.getElementById('bank2');
-
-const stopButton = document.getElementById('stop-all');
-
-const loadButton = document.getElementById('load');
-
-// seamless audio loop
-
-for (let n = 0; n < bank1.length; n++) {
-    bank1[n].addEventListener('timeupdate', function () {
-        var buffer = .44
-        if (this.currentTime > this.duration - buffer) {
-            this.currentTime = 0
-            this.play()
-        }
-    }, false);
-    bank2[n].addEventListener('timeupdate', function () {
-        var buffer = .44
-        if (this.currentTime > this.duration - buffer) {
-            this.currentTime = 0
-            this.play()
-        }
-    }, false);
-}
-
-
-for (let i = 1; i < 10; i++) {
-    let id = `pad${i}`;
-    document.getElementById(id).style.backgroundColor = 'lightgrey';
-}
-
-for (let m = 0; m < pads[0].length; m++) {
-    shotButton.style.backgroundColor = 'lightgoldenrodyellow';
-    toggleButton.style.backgroundColor = 'lightgrey';
-    pads[0][m].onmousedown = function () { startPlay(pads[0][m], pads[1][m], pads[2][m]) };
-    pads[0][m].onmouseup = function () { stopPlay(pads[0][m], pads[1][m]) };
-}
-
-loadButton.style.backgroundColor = 'lightgrey';
-
-function isClicked(item) {
-    if (item.style.backgroundColor === 'lightgrey') {
+function isClicked(button) {
+    if (button.style.backgroundColor === 'lightgrey') {
         return false;
     } else {
         return true;
     }
 }
 
-function startPlay(pad, sound, color) {
-    sound.play();
-    pad.style.backgroundColor = color;
-}
+document.getElementById('power').onclick = function () {
 
-function stopPlay(pad, sound) {
-    sound.load();
-    pad.style.backgroundColor = 'lightgrey';
-}
-
-function playToggleMode(pad, sound, color) {
-
-    if (isClicked(pad) === false) {
-        startPlay(pad, sound, color);
-
-    } else if (isClicked(pad) === true) {
-        stopPlay(pad, sound)
-    }
-}
-
-function displaySequencer(sequencerId, color) {
-    document.getElementById(sequencerId).style.display = 'block';
-    document.getElementById('seq-indicator').style.backgroundColor = color;
-}
-function hideSequencer(sequencerId) {
-    document.getElementById(sequencerId).style.display = 'none';
-}
-
-function stopAll() {
-    for (let j = 0; j < pads[0].length; j++) {
-        stopPlay(pads[0][j], pads[1][j])
-    }
-}
-
-// click handlers
+    if (isClicked(document.getElementById('power')) === false) {
 
 
-// mode button clicks
+        display.innerHTML = 'Welcome';
+        document.getElementById('power').style.backgroundColor = 'orange';
+        document.getElementById('power').style.border = '2px outset orange';
 
-shotButton.onclick = function () {
-
-    for (let k = 0; k < pads[0].length; k++) {
-        shotButton.style.backgroundColor = 'lightgoldenrodyellow';
-        toggleButton.style.backgroundColor = 'lightgrey';
-        loadButton.style.backgroundColor = 'lightgrey';
-        pads[0][k].onmousedown = function () { startPlay(pads[0][k], pads[1][k], pads[2][k]) };
-        pads[0][k].onmouseup = function () { stopPlay(pads[0][k], pads[1][k]) };
-        pads[0][k].onclick = "event.stopPropagation()";
-    }
-
-};
-toggleButton.onclick = function () {
-
-    for (let j = 0; j < pads[0].length; j++) {
-        toggleButton.style.backgroundColor = 'lightgreen';
-        shotButton.style.backgroundColor = 'lightgrey';
-        loadButton.style.backgroundColor = 'lightgrey';
-        pads[0][j].onclick = function () { playToggleMode(pads[0][j], pads[1][j], pads[2][j]) };
-        pads[0][j].onmousedown = "event.stopPropagation()";
-        pads[0][j].onmouseup = "event.stopPropagation()";
-    }
-};
-
-loadButton.onclick = function () {
-
-    stopAll();
-    for (let p = 0; p < pads[0].length; p++) {
-        toggleButton.style.backgroundColor = 'lightgrey';
-        shotButton.style.backgroundColor = 'lightgrey';
-        loadButton.style.backgroundColor = 'tomato';
-        pads[0][p].onclick = function () {
-            pads[0][p].onmousedown = function () { startPlay(pads[0][p], pads[1][p], pads[2][p]) };
-            pads[0][p].onmouseup = function () { stopPlay(pads[0][p], pads[1][p]) };
-            for (let i=0; i<9; i++) {
-                hideSequencer(`seq-cont${i}`);
+        document.getElementById('body').onkeydown = function(e) {
+            let pressedKey = (e.key).toLowerCase();
+            if (pressedKey === 'q') {
+                pads[1][0].play();
+                display.innerHTML = 'Kick Drum 1';
+                pads[0][0].style.backgroundColor = pads[2][0];
+                pads[0][0].style.border = `2px outset ${pads[2][0]}`;
             }
-            displaySequencer(`seq-cont${p}`, pads[2][p]);
-            
+            if (pressedKey === 'w') {
+                pads[1][1].play();
+                display.innerHTML = 'Clap 1';
+                pads[0][1].style.backgroundColor = pads[2][1];
+                pads[0][1].style.border = `2px outset ${pads[2][1]}`;
+            }
+            if (pressedKey === 'e') {
+                pads[1][2].play();
+                display.innerHTML = 'Hi Hat 1';
+                pads[0][2].style.backgroundColor = pads[2][2];
+                pads[0][2].style.border = `2px outset ${pads[2][2]}`;
+            }
+            if (pressedKey === 'a') {
+                pads[1][3].play();
+                display.innerHTML = 'Open Hat 1';
+                pads[0][3].style.backgroundColor = pads[2][3];
+                pads[0][3].style.border = `2px outset ${pads[2][3]}`;
+            }
+            if (pressedKey === 's') {
+                pads[1][4].play();
+                display.innerHTML = 'Shaker 1';
+                pads[0][4].style.backgroundColor = pads[2][4];
+                pads[0][4].style.border = `2px outset ${pads[2][4]}`;
+            }
+            if (pressedKey === 'd') {
+                pads[1][5].play();
+                display.innerHTML = 'Ride 1';
+                pads[0][5].style.backgroundColor = pads[2][5];
+                pads[0][5].style.border = `2px outset ${pads[2][5]}`;
+            }
+            if (pressedKey === 'z') {
+                pads[1][6].play();
+                display.innerHTML = 'Percussion 1';
+                pads[0][6].style.backgroundColor = pads[2][6];
+                pads[0][6].style.border = `2px outset ${pads[2][6]}`;
+            }
+            if (pressedKey === 'x') {
+                pads[1][7].play();
+                display.innerHTML = 'Percussion 2';
+                pads[0][7].style.backgroundColor = pads[2][7];
+                pads[0][7].style.border = `2px outset ${pads[2][7]}`;
+            }
+            if (pressedKey === 'c') {
+                pads[1][8].play();
+                display.innerHTML = 'Percussion 3';
+                pads[0][8].style.backgroundColor = pads[2][8];
+                pads[0][8].style.border = `2px outset ${pads[2][8]}`;
+            }
         };
+
+        document.getElementById('body').onkeyup = function(e) {
+            let pressedKey = (e.key).toLowerCase();
+            if (pressedKey === 'q') {
+                pads[0][0].style.backgroundColor = 'lightgrey';
+                pads[0][0].style.border = '2px outset lightgrey';
+            };
+            if (pressedKey === 'w') {
+                pads[0][1].style.backgroundColor = 'lightgrey';
+                pads[0][1].style.border = '2px outset lightgrey';
+            };
+            if (pressedKey === 'e') {
+                pads[0][2].style.backgroundColor = 'lightgrey';
+                pads[0][2].style.border = '2px outset lightgrey';
+            };
+            if (pressedKey === 'a') {
+                pads[0][3].style.backgroundColor = 'lightgrey';
+                pads[0][3].style.border = '2px outset lightgrey';
+            };
+            if (pressedKey === 's') {
+                pads[0][4].style.backgroundColor = 'lightgrey';
+                pads[0][4].style.border = '2px outset lightgrey';
+            };
+            if (pressedKey === 'd') {
+                pads[0][5].style.backgroundColor = 'lightgrey';
+                pads[0][5].style.border = '2px outset lightgrey';
+            };
+            if (pressedKey === 'z') {
+                pads[0][6].style.backgroundColor = 'lightgrey';
+                pads[0][6].style.border = '2px outset lightgrey';
+            };
+            if (pressedKey === 'x') {
+                pads[0][7].style.backgroundColor = 'lightgrey';
+                pads[0][7].style.border = '2px outset lightgrey';
+            };
+            if (pressedKey === 'c') {
+                pads[0][8].style.backgroundColor = 'lightgrey';
+                pads[0][8].style.border = '2px outset lightgrey';
+            };
+
+        };
+
+
+        pads[0][0].onclick = function () {
+            pads[1][0].play();
+            display.innerHTML = 'Kick Drum 1';
+        }
+        pads[0][0].onmousedown = function () {
+            pads[0][0].style.backgroundColor = pads[2][0];
+            pads[0][0].style.border = `2px outset ${pads[2][0]}`;
+        }
+        pads[0][0].onmouseup = function () {
+            pads[0][0].style.backgroundColor = 'lightgrey';
+            pads[0][0].style.border = '2px outset lightgrey';
+        }
+
+        pads[0][1].onclick = function () {
+            pads[1][1].play();
+            display.innerHTML = 'Clap 1';
+        }
+        pads[0][1].onmousedown = function () {
+            pads[0][1].style.backgroundColor = pads[2][1];
+            pads[0][1].style.border = `2px outset ${pads[2][1]}`;
+        }
+        pads[0][1].onmouseup = function () {
+            pads[0][1].style.backgroundColor = 'lightgrey';
+            pads[0][1].style.border = '2px outset lightgrey';
+        }
+
+        pads[0][2].onclick = function () {
+            pads[1][2].play();
+            display.innerHTML = 'Hi Hat 1';
+        }
+        pads[0][2].onmousedown = function () {
+            pads[0][2].style.backgroundColor = pads[2][2];
+            pads[0][2].style.border = `2px outset ${pads[2][2]}`;
+        }
+        pads[0][2].onmouseup = function () {
+            pads[0][2].style.backgroundColor = 'lightgrey';
+            pads[0][2].style.border = '2px outset lightgrey';
+
+        }
+
+        pads[0][3].onclick = function () {
+            pads[1][3].play();
+            display.innerHTML = 'Open Hat 1';
+        }
+        pads[0][3].onmousedown = function () {
+            pads[0][3].style.backgroundColor = pads[2][3];
+            pads[0][3].style.border = `2px outset ${pads[2][3]}`;
+        }
+        pads[0][3].onmouseup = function () {
+            pads[0][3].style.backgroundColor = 'lightgrey';
+            pads[0][3].style.border = '2px outset lightgrey';
+        }
+
+        pads[0][4].onclick = function () {
+            pads[1][4].play();
+            display.innerHTML = 'Shaker 1';
+        }
+        pads[0][4].onmousedown = function () {
+            pads[0][4].style.backgroundColor = pads[2][4];
+            pads[0][4].style.border = `2px outset ${pads[2][4]}`;
+        }
+        pads[0][4].onmouseup = function () {
+            pads[0][4].style.backgroundColor = 'lightgrey';
+            pads[0][4].style.border = '2px outset lightgrey';
+        }
+
+        pads[0][5].onclick = function () {
+            pads[1][5].play();
+            display.innerHTML = 'Ride 1';
+        }
+        pads[0][5].onmousedown = function () {
+            pads[0][5].style.backgroundColor = pads[2][5];
+            pads[0][5].style.border = `2px outset ${pads[2][5]}`;
+        }
+        pads[0][5].onmouseup = function () {
+            pads[0][5].style.backgroundColor = 'lightgrey';
+            pads[0][5].style.border = '2px outset lightgrey';
+        }
+
+        pads[0][6].onclick = function () {
+            pads[1][6].play();
+            display.innerHTML = 'Percussion 1';
+        }
+        pads[0][6].onmousedown = function () {
+            pads[0][6].style.backgroundColor = pads[2][6];
+            pads[0][6].style.border = `2px outset ${pads[2][6]}`;
+        }
+        pads[0][6].onmouseup = function () {
+            pads[0][6].style.backgroundColor = 'lightgrey';
+            pads[0][6].style.border = '2px outset lightgrey';
+        }
+
+        pads[0][7].onclick = function () {
+            pads[1][7].play();
+            display.innerHTML = 'Percussion 2';
+        }
+        pads[0][7].onmousedown = function () {
+            pads[0][7].style.backgroundColor = pads[2][7];
+            pads[0][7].style.border = `2px outset ${pads[2][7]}`;
+        }
+        pads[0][7].onmouseup = function () {
+            pads[0][7].style.backgroundColor = 'lightgrey';
+            pads[0][7].style.border = '2px outset lightgrey';
+        }
+
+        pads[0][8].onclick = function () {
+            pads[1][8].play();
+            display.innerHTML = 'Percussion 3';
+        }
+        pads[0][8].onmousedown = function () {
+            pads[0][8].style.backgroundColor = pads[2][8];
+            pads[0][8].style.border = `2px outset ${pads[2][8]}`;
+        }
+        pads[0][8].onmouseup = function () {
+            pads[0][8].style.backgroundColor = 'lightgrey';
+            pads[0][8].style.border = '2px outset lightgrey';
+        }
+
+    } else {
+        document.getElementById('power').style.backgroundColor = 'lightgrey';
+        display.innerHTML = '';
+        document.getElementById('power').style.border = '2px outset lightgrey';
+        for (let i=0; i<9; i++) {
+            pads[0][i].onclick = event.stopPropagation();
+            pads[0][i].onmousedown = event.stopPropagation();
+            pads[0][i].onmouseup = event.stopPropagation();
+        }
+        document.getElementById('body').onkeydown = event.stopPropagation();
+        document.getElementById('body').onkeyup = event.stopPropagation();
     }
 }
-
-
-// bank button clicks
-
-bank1Button.onclick = function () {
-    stopAll();
-    bank1Button.style.backgroundColor = 'lightpink';
-    bank2Button.style.backgroundColor = 'lightgrey';
-    pads[1] = bank1;
-}
-bank2Button.onclick = function () {
-    stopAll();
-    bank2Button.style.backgroundColor = 'lightskyblue';
-    bank1Button.style.backgroundColor = 'lightgrey';
-    pads[1] = bank2;
-}
-
-// stop all button click
-
-stopButton.onclick = function () { stopAll() };
-stopButton.onmousedown = function () {
-    stopButton.style.backgroundColor = 'red';
-}
-stopButton.onmouseup = function () {
-    stopButton.style.backgroundColor = 'lightgrey';
-}
-
-// load button click
-
